@@ -158,12 +158,14 @@
   </div>
   <script>
     const POSTURL = "http://78.47.206.255:18003";
+    const POSTURL4 = "http://78.47.206.255:18004/jsonrpc";
     const INVOKE = "invokeView";
 
     const GCMETHOD = "getContract";
     const CONTTYPE = "application/json";
     const CONT_ADDY = 'TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM'
     const SENDER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7"
+    const BUYER =   "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z"
     const CHAINID = 24442;
     new Vue({
       el: '#app',
@@ -180,7 +182,12 @@
 
       },
       //---------------------------------------------------------------------nms:
+      //---------------------------------------------------------------------nms:
       methods: {
+          // user inputs:
+          let PRODUCTID_REVIEW = ["hat", "big"]
+          // let SENDER = 'X'
+
 
         async postReview () {
           let DESCRIPTION = "(String productId, String reviewComments) return LReviewContract$Review"
@@ -197,7 +204,7 @@
                     CONT_ADDY, REQUEST_TYPE, DESCRIPTION, PRODUCTID_REVIEW, REMARKS];
 
 
-          const result = await axios.post(POSTURL, {
+          const result = await axios.post(POSTURL4, {
             "jsonrpc": "2.0",
             "method": METHOD_D,
             "params": PARAMS,
