@@ -75,7 +75,11 @@
               type="button">
               Show Products
             </button>
-            <!-- <button @click="getReviews"
+              <button @click="postReview"
+              class="w-full mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button">
+              Show Products
+            </button>           <!-- <button @click="getReviews"
               class="w-full mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button">
               Show Reviews
@@ -163,8 +167,9 @@
 
     const GCMETHOD = "getContract";
     const CONTTYPE = "application/json";
-    const CONT_ADDY = 'TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM'
-    const SENDER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7"
+    const CONT_ADDY = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
+    const SENDER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const OWNER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
     const BUYER =   "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z"
     const CHAINID = 24442;
     new Vue({
@@ -181,28 +186,21 @@
         this.getAllProductIds()
 
       },
-      //---------------------------------------------------------------------nms:
-      //---------------------------------------------------------------------nms:
-      methods: {
-          // user inputs:
-          let PRODUCTID_REVIEW = ["hat", "big"]
-          // let SENDER = 'X'
-
-
+      methods: {                              // user inputs:  userid, product id, review, remarks
         async postReview () {
-          let DESCRIPTION = "(String productId, String reviewComments) return LReviewContract$Review"
+          let PRODUCTID_REVIEW = ["hat", "big"];
+          let DESCRIPTION = "(String productId, String reviewComments) return LReviewContract$Review";
           let METHOD_D = "callContract";
-          let REQUEST_TYPE = "writeReview"
+          let REQUEST_TYPE = "writeReview";
           let ID_D = 900092;
-          let GAS_PRICE = 25
+          let GAS_PRICE = 25;
           let PW = "password123"
-          let REMARKS = "Viking Chain Product Review"
-          let VALUE_ASSET = '25'
-          let BIG_VALUE = 100000000 * VALUE_ASSET
-          let GAS_LIMIT = 99000000
+          let REMARKS = "Viking Chain Product Review";
+          let VALUE_ASSET = '25';
+          let BIG_VALUE = 100000000 * VALUE_ASSET;
+          let GAS_LIMIT = 99000000;
           let PARAMS =  [CHAINID, BUYER, PW, BIG_VALUE, GAS_LIMIT, GAS_PRICE,
                     CONT_ADDY, REQUEST_TYPE, DESCRIPTION, PRODUCTID_REVIEW, REMARKS];
-
 
           const result = await axios.post(POSTURL4, {
             "jsonrpc": "2.0",
@@ -220,10 +218,6 @@
           this.reviews.push(reviewObj)
           this.review = ''
         },
-
-
-
-
         async getContract() {
           let METHOD_D = GCMETHOD;
           let PARAMS = [CHAINID, CONT_ADDY];
@@ -235,7 +229,6 @@
             "params": PARAMS,
             "id": ID_D
           })
-
           console.log(result.data.result)
           this.contract = result.data.result
         },
