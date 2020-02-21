@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>-->
 <html lang="en">
 
 <head>
@@ -158,9 +158,13 @@
   </div>
   <script>"http://westteam.nulstar.com:18004/jsonrpc"
 
+    // Kathy's
     const POSTURL = "http://78.47.206.255:18003";
     const POSTURL_k4 = "http://78.47.206.255:18004/jsonrpc";
+    const CHAINID_k = 24442;
 
+    // west
+    const CHAINID_w = 4810;
     const POSTURL_w4 = "http://westteam.nulstar.com:18004/jsonrpc";
     const POSTURL_w3 = "http://westteam.nulstar.com:18003";
 
@@ -170,18 +174,16 @@
     const CONTTYPE =  "application/json;charset=UTF-8";
 
 
-    const CONT_ADDYw = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
-    const SENDERw =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
-    const OWNERw =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
-    const BUYERw =   "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z"
-    const CHAINIDw = 4810;
+    const CONT_ADDY_w = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
+    const SENDER_w =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const OWNER_w =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const BUYER_w =   "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z"
 
 
     const CONT_ADDY = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
     const SENDER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
     const OWNER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
     const BUYER =   "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z"
-    const CHAINID = 24442;
     new Vue({
       el: '#app',
       data: {
@@ -210,11 +212,11 @@
           let VALUE_ASSET = 25;
           let BIG_VALUE = 100000000 * VALUE_ASSET;
           let GAS_LIMIT = 99000000;
-          let PARAMS =  [CHAINID, BUYER, PW, BIG_VALUE, GAS_LIMIT, GAS_PRICE, CONT_ADDY, REQUEST_TYPE,
+          let PARAMS =  [CHAINID_k, BUYER, PW, BIG_VALUE, GAS_LIMIT, GAS_PRICE, CONT_ADDY, REQUEST_TYPE,
             DESCRIPTION, PRODUCTID_REVIEW, REMARKS];
 
           const result = await axios.post(POSTURL_k4, {
-            CONTLABEL: CONTTYPE,
+            "headers": { CONTTYPE }
             "jsonrpc": "2.0",
             "method": METHOD_D,
             "params": PARAMS,
@@ -232,7 +234,7 @@
         },
         async getContract() {
           let METHOD_D = GCMETHOD;
-          let PARAMS = [CHAINID, CONT_ADDY];
+          let PARAMS = [CHAINID_k, CONT_ADDY];
           let ID_D = 900032;
 
           const result = await axios.post(POSTURL, {
@@ -251,7 +253,7 @@
           let LASTLIST = [];
 
           let ID_D = 900033;
-          let PARAMS = [CHAINID, CONT_ADDY, REQUEST_TYPE, RET_TYPE, LASTLIST];
+          let PARAMS = [CHAINID_k, CONT_ADDY, REQUEST_TYPE, RET_TYPE, LASTLIST];
 
           const result = await axios.post(POSTURL, {
             "jsonrpc": "2.0",
@@ -268,7 +270,7 @@
           let METHOD_D = "invokeView";
           let REQUEST_TYPE = "getReviews";
           let ID_D = 900033;
-          let PARAMS = [CHAINID, CONT_ADDY, REQUEST_TYPE, RET_TYPE, LASTLIST];
+          let PARAMS = [CHAINID_k, CONT_ADDY, REQUEST_TYPE, RET_TYPE, LASTLIST];
 
           const result = await axios.post(POSTURL, {
             "jsonrpc": "2.0",
