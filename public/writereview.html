@@ -1,12 +1,19 @@
 <!doctype html>
-<html lang="en">
+
+  <html lang="en-US">
+
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" >
+  <meta http-equiv="Pragma" content="no-cache" >
+  <meta http-equiv="Expires" content=0 >
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="stylesheet" href="/build/tailwind.css">
+  <!-- <link rel="stylesheet" href="/build/tailwind.css"> -->
+  <link rel="stylesheet" href= "http://westteam.nulstar.com/build/tailwind.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"
     integrity="sha256-chlNFSVx3TdcQ2Xlw7SvnbLAavAQLO0Y/LBiWX04viY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
@@ -47,7 +54,7 @@
         </span>
       </h1>
       <div class="lg:flex lg:justify-between">
-        <div class="leading-none sm:leading-relaxed text-center block mt-14 w-full lg:w-2/3 xl:w-2/3">
+        <div class="leading-none sm:leading-relaxed text-center block mt-14 w-full lg:w-1/2 xl:w-1/2">
 
 
           <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -82,7 +89,7 @@
               </label>
               <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
-                leading-tight focus:outline-none focus:shadow-outline"
+                leading-tight focus:outline-none focus:shadow-outline row-span-4"
                 id="productid" type="text" placeholder="Productid">
           </div>
           <div>
@@ -90,7 +97,7 @@
               Your Review
             </label>
             <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+              class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 
                         leading-tight focus:outline-none focus:shadow-outline"
                     id="thereview" type="text" placeholder="Productid">
          </div>
@@ -111,13 +118,18 @@
 
 
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" v-if="reviews">
+
           <div class="text-center relative text-4xl font-extrabold">Results</div>
+
           <div class="w-full rounded shadow-md" v-for="review in reviews">
+
             <div class="items-center md:flex lg:block xl:flex rounded-lg p-6">
+
               <img class="h-16 w-16 md:h-16 md:w-16 rounded-full mx-auto xl:mx-0 xl:mr-6 "
+
                 src="./favicon.ico">
               <div class="text-center md:text-left">
-                <div class="text-purple-500 font-medium text-lg">Result for: {{review.postReview}}</div>
+                <div class="text-purple-500 font-medium text-lg">Results for: {{review.postReview}}</div>
 
               </div>
             </div>
@@ -153,12 +165,17 @@
 
     const MULTIPLY = 100000000;
     const INVOKE = "invokeView";
-    const CONTLABEL = "Content-Type";
     const GCMETHOD = "getContract";
-    const CONTTYPE = "application/json;charset=UTF-8";
-    const OPTIONS = {
-      headers: { 'Content-Type': 'application/json;charset=UTF-8' }
-    };
+
+    const ORIGIN = "Origin: http://westteam.nulstar.com"
+    const CACHE =  'cache-control: no-cache'
+    const KEEPA = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    const CONTLABEL = 'Content-Type: application/json;charset=UTF-8'
+    
+    axios.defaults.headers = {
+             CONTLABEL, ORIGIN, CACHE, KEEPA
+            }
+
 
     new Vue({
       el: '#app',
@@ -171,7 +188,7 @@
       },
       async mounted() {
 
-        this.getAllProductIds();
+        // this.getAllProductIds();
 
       },
       methods: {                              // user inputs:  userid, product id, review, remarks
@@ -194,6 +211,10 @@
           let GAS_LIMIT = 99000000;
           let PARAMS = [CHAINID_k, BUYER, PW, BIG_VALUE, GAS_LIMIT, GAS_PRICE, CONT_ADDY_k, REQUEST_TYPE,
             DESCRIPTION, PRODUCTID_REVIEW, REMARKS];
+            
+            
+            
+   
 
           const result = await axios.post(POSTURL_k4, OPTIONS,
             {
