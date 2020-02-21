@@ -27,11 +27,10 @@
           </svg>
           <a href="index.html" class="font-semibold text-xl tracking-tight">Viking Chain</a>
         </div>
+
         <div class="flex-1 items-center ml-6">
-          <a class="text-white font-black  mr-8" href="index.html">Home<a>
-            <a class="text-white font-black  mr-8" href="">Wallet</a>
+          <a class="text-white font-black  mr-8" href="index.html">Home</a>
               <a class="text-white font-black  mr-8" href="reviews.html">Reviews</a>
-              <a class="text-white font-black  mr-8" href="">Help</a>
         </div>
         <a class="hover:bg-purple-700 rounded shadow-md text-white mr-2 font-bold py-2 px-5 bg-purple-600" href="">Post
           a Review</a>
@@ -78,26 +77,23 @@
               <button @click="postReview"
               class="w-full mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button">
-              Show Products
+              Post Review
             </button>           <!-- <button @click="getReviews"
               class="w-full mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button">
               Show Reviews
             </button> -->
-
-
-
           </form>
         </div>
         <div class="w-full xl:w-1/2 lg:w-1/3 md:mt-auto md:mb-auto sm:mt-6">
           <div class="bg-white shadow rounded px-8 pt-6 pb-8 mb-4" v-if="contract">
             <div class="text-center relative text-4xl font-extrabold">Contract Info</div>
-            <div>Alias: {{contract.alias}}</div>
           </div>
           <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" v-if="products">
             <div class="text-center relative text-4xl font-extrabold">Products</div>
             <div class="text-center relative text-2xl font-extrabold">Select a product to display its reviews</div>
             <div class="flex-grow" v-for="product in products">
+
               <button @click="getReviews(product)"
                 class="w-full rounded bg-purple-300 hover:bg-purple-400 px-4 mb-2 text-center text-xl text-white font-bold">
 
@@ -146,12 +142,12 @@
           <div class="w-full rounded shadow-md" v-for="review in reviews">
             <div class="items-center md:flex lg:block xl:flex rounded-lg p-6">
               <img class="h-16 w-16 md:h-16 md:w-16 rounded-full mx-auto xl:mx-0 xl:mr-6 "
-                src="https://i.pravatar.cc/150?img=68">
+                src="./favicon.ico">
               <div class="text-center md:text-left">
                 <!-- <h2 class="text-2xl">Erwin Jeager</h2> -->
                 <div class="text-purple-500 font-medium text-lg">Review for: {{review.productId}}</div>
 
-                <div class="text-gray-600 leading-tight text-lg  xl:text-xl">{{review.comments}}</div>
+                <div class="text-gray-600 leading-tight text-base  xl:text-xl">{{review.comments}}</div>
               </div>
             </div>
           </div>
@@ -160,13 +156,27 @@
 
     </main>
   </div>
-  <script>
-    const POSTURL = "http://78.47.206.255:18003";
-    const POSTURL4 = "http://78.47.206.255:18004/jsonrpc";
-    const INVOKE = "invokeView";
+  <script>"http://westteam.nulstar.com:18004/jsonrpc"
 
+    const POSTURL = "http://78.47.206.255:18003";
+    const POSTURL_k4 = "http://78.47.206.255:18004/jsonrpc";
+
+    const POSTURL_w4 = "http://westteam.nulstar.com:18004/jsonrpc";
+    const POSTURL_w3 = "http://westteam.nulstar.com:18003";
+
+    const INVOKE = "invokeView";
+    const CONTLABEL = "Content-Type";
     const GCMETHOD = "getContract";
-    const CONTTYPE = "application/json";
+    const CONTTYPE =  "application/json;charset=UTF-8";
+
+
+    const CONT_ADDYw = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
+    const SENDERw =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const OWNERw =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const BUYERw =   "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z"
+    const CHAINIDw = 4810;
+
+
     const CONT_ADDY = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
     const SENDER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
     const OWNER =   "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
@@ -187,36 +197,38 @@
 
       },
       methods: {                              // user inputs:  userid, product id, review, remarks
+
         async postReview () {
-          let PRODUCTID_REVIEW = ["hat", "big"];
+          let PRODUCTID_REVIEW = '["hat", "big"]';
           let DESCRIPTION = "(String productId, String reviewComments) return LReviewContract$Review";
-          let METHOD_D = "callContract";
+          let METHOD_D = "contractCall";
           let REQUEST_TYPE = "writeReview";
           let ID_D = 900092;
           let GAS_PRICE = 25;
           let PW = "password123"
           let REMARKS = "Viking Chain Product Review";
-          let VALUE_ASSET = '25';
+          let VALUE_ASSET = 25;
           let BIG_VALUE = 100000000 * VALUE_ASSET;
           let GAS_LIMIT = 99000000;
-          let PARAMS =  [CHAINID, BUYER, PW, BIG_VALUE, GAS_LIMIT, GAS_PRICE,
-                    CONT_ADDY, REQUEST_TYPE, DESCRIPTION, PRODUCTID_REVIEW, REMARKS];
+          let PARAMS =  [CHAINID, BUYER, PW, BIG_VALUE, GAS_LIMIT, GAS_PRICE, CONT_ADDY, REQUEST_TYPE,
+            DESCRIPTION, PRODUCTID_REVIEW, REMARKS];
 
-          const result = await axios.post(POSTURL4, {
+          const result = await axios.post(POSTURL_k4, {
+            CONTLABEL: CONTTYPE,
             "jsonrpc": "2.0",
             "method": METHOD_D,
             "params": PARAMS,
             "id": ID_D
           })
 
-          console.log(result)
+          console.log(result);
 
           const reviewObj = {
             productId: this.selectedProductId,
             comments: this.review
           }
-          this.reviews.push(reviewObj)
-          this.review = ''
+          this.reviews.push(reviewObj);
+          this.review = '';
         },
         async getContract() {
           let METHOD_D = GCMETHOD;
@@ -235,7 +247,7 @@
         async getAllProductIds() {
           let RET_TYPE = "() return String";
           let METHOD_D = "invokeView";
-          let REQUEST_TYPE = "getAllProductIds"
+          let REQUEST_TYPE = "getAllProductIds";
           let LASTLIST = [];
 
           let ID_D = 900033;
@@ -247,8 +259,8 @@
             "params": PARAMS
           })
 
-          const products = JSON.parse(result.data.result.result)
-          this.products = products
+          const products = JSON.parse(result.data.result.result);
+          this.products = products;
         },
         async getReviews(productId) {
           let RET_TYPE = "(String productId) return Ljava/util/List;";
@@ -265,11 +277,11 @@
             "id": ID_D
           })
 
-          const reviews = result.data.result.result
-          this.reviews = JSON.parse(reviews)
-          this.selectedProductId = productId
+          const reviews = result.data.result.result;
+          this.reviews = JSON.parse(reviews);
+          this.selectedProductId = productId;
 
-          console.log(JSON.parse(reviews))
+          console.log(JSON.parse(reviews));
 
         }
 
