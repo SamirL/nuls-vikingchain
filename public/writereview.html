@@ -1,0 +1,248 @@
+<!doctype html>
+
+  <html lang="en-US">
+
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" >
+  <meta http-equiv="Pragma" content="no-cache" >
+  <meta http-equiv="Expires" content=0 >
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <!-- <link rel="stylesheet" href="/build/tailwind.css"> -->
+  <link rel="stylesheet" href= "http://westteam.nulstar.com/build/tailwind.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"
+    integrity="sha256-chlNFSVx3TdcQ2Xlw7SvnbLAavAQLO0Y/LBiWX04viY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <title>Viking Chain</title>
+</head>
+
+<body class="antialiased font-sans">
+  <div id="app" class="relative ">
+
+
+    <nav class="flex items-center justify-between flex-wrap bg-purple-400 p-6">
+      <div class="flex items-center justify-between flex-wrap mx-auto container">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+          <svg class="fill-current h-8 w-8 mr-2" width="54" height="74" viewBox="0 0 54 74"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
+          </svg>
+          <a href="index.html" class="font-semibold text-xl tracking-tight">Viking Chain</a>
+        </div>
+
+        <div class="flex-1 items-center ml-6">
+          <a class="text-white font-black  mr-8" href="index.html">Home</a>
+          <a class="text-white font-black  mr-8" href="reviews.html">Reviews</a>
+        </div>
+
+      </div>
+
+    </nav>
+
+   <!--             ###################################################  main  -->
+
+
+    <main class="mx-auto container">
+      <h1 class="mt-3 text-center font-extrabold text-3xl">
+        <span class="">
+          Product Reviewer
+        </span>
+      </h1>
+      <div class="lg:flex lg:justify-between">
+        <div class="leading-none sm:leading-relaxed text-center block mt-14 w-full lg:w-1/2 xl:w-1/2">
+
+
+          <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+          
+          
+              <!--             ###################################################  user / password   -->
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                Username
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username" type="text" placeholder="Username">
+            </div>
+          
+            <div class="mb-6">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                Password
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="password" type="password" placeholder="******************">
+            </div>
+          
+          
+            <!--               ###################################################  Post a Review -->
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                       To Post a Review, Enter the Product ID: (example: Lotion)
+                 </label>
+          
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="productid">
+                Product Id
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                leading-tight focus:outline-none focus:shadow-outline row-span-4"
+                id="productid" type="text" placeholder="Productid">
+          </div>
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="thereview">
+              Your Review
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 
+                        leading-tight focus:outline-none focus:shadow-outline"
+                    id="thereview" type="text" placeholder="Productid">
+         </div>
+                <button @click="postReview"
+                class="w-full mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4
+                      rounded focus:outline-none focus:shadow-outline"
+                type="button">
+                Post Review
+              </button>
+       </form>
+            
+      </div>
+      </div>
+      </div>
+          <!-- -------------- #####################################    nms: -->
+
+
+
+
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" v-if="reviews">
+
+          <div class="text-center relative text-4xl font-extrabold">Results</div>
+
+          <div class="w-full rounded shadow-md" v-for="review in reviews">
+
+            <div class="items-center md:flex lg:block xl:flex rounded-lg p-6">
+
+              <img class="h-16 w-16 md:h-16 md:w-16 rounded-full mx-auto xl:mx-0 xl:mr-6 "
+
+                src="./favicon.ico">
+              <div class="text-center md:text-left">
+                <div class="text-purple-500 font-medium text-lg">Results for: {{review.postReview}}</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+   </main>
+  </div>    
+          <!-- end of app -->
+
+  <script>
+
+    // Kathy's
+    const POSTURL_k = "http://78.47.206.255:18003";
+    const POSTURL_k4 = "http://78.47.206.255:18004/jsonrpc";
+    const CHAINID_k = 24442;
+
+    // west
+    const CHAINID_w = 4810;
+    const POSTURL_w4 = "http://westteam.nulstar.com:18004/jsonrpc";
+    const POSTURL_w3 = "http://westteam.nulstar.com:18003";
+    const CONT_ADDY_w = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
+    const SENDER_w = "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const OWNER_w = "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const BUYER_w = "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z"
+
+
+    const CONT_ADDY_k = "TTSETeCA3FueL9cKCiDR8vAiRiGVtVCJksEsstM";
+    const SENDER = "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const OWNER = "TTSETeCA3Fdhsu91EFmTuwHpXaNfWgUDL35sZS7";
+    const BUYER = "TTSETeCA3FWQ3Y32TCFEwJvzqGbxiXNxtkzPb3z";
+
+    const MULTIPLY = 100000000;
+    const INVOKE = "invokeView";
+    const GCMETHOD = "getContract";
+
+    const ORIGIN = "Origin: http://westteam.nulstar.com"
+    const CACHE =  'cache-control: no-cache'
+    const KEEPA = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    const CONTLABEL = 'Content-Type: application/json;charset=UTF-8'
+    
+    axios.defaults.headers = {
+             CONTLABEL, ORIGIN, CACHE, KEEPA
+            }
+
+
+    new Vue({
+      el: '#app',
+      data: {
+        contract: null,
+        products: null,
+        reviews: null,
+        review: null,
+        selectedProductId: null
+      },
+      async mounted() {
+
+        // this.getAllProductIds();
+
+      },
+      methods: {                              // user inputs:  userid, product id, review, remarks
+
+        async postReview() {
+          console.log("posting the review");
+
+          let BIG_VALUE = 2500000000;
+
+          // let BIG_VALUE = MULTIPLY * VALUE_ASSET;
+
+          let PRODUCTID_REVIEW = '["hat", "big"]';
+          let DESCRIPTION = "(String productId, String reviewComments) return LReviewContract$Review";
+          let METHOD_D = "contractCall";
+          let REQUEST_TYPE = "writeReview";
+          let ID_D = 900092;
+          let GAS_PRICE = 25;
+          let PW = "password123"
+          let REMARKS = "Viking Chain Product Review";
+          let GAS_LIMIT = 99000000;
+          let PARAMS = [CHAINID_k, BUYER, PW, BIG_VALUE, GAS_LIMIT, GAS_PRICE, CONT_ADDY_k, REQUEST_TYPE,
+            DESCRIPTION, PRODUCTID_REVIEW, REMARKS];
+            
+            
+            
+   
+
+          const result = await axios.post(POSTURL_k4,
+            {
+              "jsonrpc": "2.0",
+              "method": METHOD_D,
+              "params": PARAMS,
+              "id": ID_D
+            })
+
+          console.log(result);
+
+          const reviewObj = {
+            productId: this.selectedProductId,
+            comments: this.review
+          }
+          this.reviews.push(reviewObj);
+          this.review = '';
+        }
+
+    },
+
+
+})
+    
+
+  </script>
+</body>
+
+</html>
